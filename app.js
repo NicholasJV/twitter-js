@@ -19,7 +19,7 @@ app.use(morgan('tiny'));
 
 
 app.get('/', function(req, res){
-	res.send("Sup world!");
+	res.send("Sup world mon!");
 })
 
 app.get('/option', function(req, res){
