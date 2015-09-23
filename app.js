@@ -16,9 +16,9 @@ var data = {
 		name: 'D\'Angelo'
 	}]
 };
-swig.renderFile(__dirname + '/views/index.html', data, function (err, output) {
-	console.log(output)
-})
+// swig.renderFile(__dirname + '/views/index.html', data, function (err, output) {
+// 	console.log(output)
+// })
 
 // app.use(function(req, res, next){
 // 	// res.send("Sup use func!");
@@ -30,10 +30,13 @@ swig.renderFile(__dirname + '/views/index.html', data, function (err, output) {
 // })
 //instead we used MORGAN BABY:
 app.use(morgan('tiny'));
-
+app.engine('html', swig.renderFile); // specify the templating engine to use
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+swig.setDefaults({ cache: false });
 
 app.get('/', function(req, res){
-	res.send("Sup world mon, cool runnings!");
+	console.log("nothing to view here, mon")
 })
 
 app.get('/option', function(req, res){
@@ -41,11 +44,8 @@ app.get('/option', function(req, res){
 })
 
 app.get('/option2', function(req, res){
-	var someHtml = swig.renderFile(__dirname + '/views/index.html', data, function (err, output) {
-		console.log(output);
-		return output;
- 	})
-	res.send(someHtml);
+	res.render( 'index', data );
+
 })
 
 app.post('/', function(req, res){
