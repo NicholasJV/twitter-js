@@ -12,6 +12,8 @@ app.use(morgan('tiny'));
 app.engine('html', swig.renderFile);
 app.set('view engine', 'html')
 app.set('views', __dirname + '/views');
+// app.use(express.static('public'));
+// app.use(express.static('views'));
 
 swig.setDefaults({ cache: false });
 app.use('/', routes);
